@@ -8,19 +8,18 @@ using System.Windows.Forms;
 
 namespace Kruspki1
 {
-    internal class Bomb
+    internal class Bomb : PictureBox
     {
         readonly Form form;
-        readonly PictureBox bomb = new PictureBox();
         readonly Timer bombTimer = new Timer();
         public Bomb(Form form, Point startingPoint)
         {
             this.form = form;
-            bomb.Location = startingPoint;
-            bomb.BackColor = Color.Red;
-            bomb.Size = new Size(48,48);
-            bomb.Tag = "RIP";
-            form.Controls.Add(bomb);
+            Location = startingPoint;
+            BackColor = Color.Red;
+            Size = new Size(48,48);
+            Tag = "RIP";
+            form.Controls.Add(this);
 
             bombTimer.Interval = 100;
             bombTimer.Tick += AttackMove;
@@ -29,12 +28,12 @@ namespace Kruspki1
         }
         private void AttackMove(object sender, EventArgs e)
         {
-            if (bomb.Top >= 440)
+            if (Top >= 440)
             {
-                form.Controls.Remove(bomb);
+                form.Controls.Remove(this);
                 bombTimer.Dispose();
             }
-            bomb.Top += 10;
+            Top += 10;
         }
     }
 }

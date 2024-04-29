@@ -10,10 +10,9 @@ using Timer = System.Windows.Forms.Timer;
 
 namespace Kruspki1
 {
-    internal abstract class Character
+    internal abstract class Character : PictureBox
     {
         protected Form form;
-        protected PictureBox character = new PictureBox();
 
         protected int movementSpeed;
         protected int timerInterval;

@@ -23,14 +23,14 @@ namespace Kruspki1
             attackInterval = 200;
             jumpTimer.Interval = movementInterval;
 
-            character.Top = defaultHeight;
-            character.Left = 100;
-            character.BackColor = Color.Pink;
-            character.Size = new Size(60,60);
+            Top = defaultHeight;
+            Left = 100;
+            BackColor = Color.Pink;
+            Size = new Size(60,60);
 
-            character.BringToFront();
+            BringToFront();
 
-            form.Controls.Add(character);
+            form.Controls.Add(this);
             form.KeyDown += Move;
             
         }
@@ -39,13 +39,13 @@ namespace Kruspki1
         {
             if(args.KeyCode == Keys.Right)
             {
-                if (character.Left + character.Size.Width > 770) return;
-                character.Left += movementSpeed;
+                if (Left + Size.Width > 770) return;
+                Left += movementSpeed;
             }
             else if (args.KeyCode == Keys.Left)
             {
-                if (character.Left < 20) return;
-                character.Left -= movementSpeed;
+                if (Left < 20) return;
+                Left -= movementSpeed;
             }
             else if (args.KeyCode == Keys.Up)
             {
@@ -56,20 +56,20 @@ namespace Kruspki1
             }
         }
         private void Jump(object sender, EventArgs args) {
-            if (character.Top == jumpHeight)
+            if (Top == jumpHeight)
             {
                 jumpTimer.Tick -= Jump;
                 jumpTimer.Tick += JumpDown;
             }
             else
             {
-                character.Top -= upPerTick;
+                Top -= upPerTick;
             }
             
         }
         private void JumpDown(object sender, EventArgs args)
         {
-            if (character.Top == defaultHeight)
+            if (Top == defaultHeight)
             {
                 jumpTimer.Tick -= JumpDown;
                 jumpTimer.Stop();
@@ -77,7 +77,7 @@ namespace Kruspki1
             }
             else
             {
-                character.Top += upPerTick;
+                Top += upPerTick;
             }
         }
         public void Attack(object sender, KeyEventArgs args)

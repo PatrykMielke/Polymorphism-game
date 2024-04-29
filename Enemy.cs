@@ -17,9 +17,9 @@ namespace Kruspki1
 
         protected Enemy(int[] ints)
         {
-            character.Top = ints[0];
-            character.Left = ints[1];
-            character.Tag = "RIP";
+            Top = ints[0];
+            Left = ints[1];
+            Tag = "RIP";
 
             movementTimer.Interval = ints[2];
             movementTimer.Tick += Move;

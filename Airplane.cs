@@ -14,20 +14,21 @@ namespace Kruspki1
         {
             movementSpeed = 20;
             this.form = form;
-            character.BackColor = Color.Gray;
-            form.Controls.Add(character);
+            BackColor = Color.Gray;
+            form.Controls.Add(this);
         }
 
         public override void Attack(object sender, EventArgs args)
         {
-            Point startingPoint = new Point(character.Left, character.Top);
-            new Bomb(form,startingPoint);
+            Point startingPoint = new Point(Left, Top);
+            // form.Controls.Add( new Bomb(form,startingPoint) );
+            Form1.enemies.Add(new Bomb(form, startingPoint));
         }
 
         public override void Move(object sender, EventArgs args)
         {
-            if (character.Left < -40) form.Controls.Remove(character);
-            character.Left -= movementSpeed;
+            if (Left < -40) form.Controls.Remove(this);
+            Left -= movementSpeed;
         }
 
         private static int[] GetAirplaneProperties()
