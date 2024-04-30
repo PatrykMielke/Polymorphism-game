@@ -8,9 +8,10 @@ using System.Windows.Forms;
 
 namespace Kruspki1
 {
+    [System.ComponentModel.DesignerCategory("Code")]
     internal class Airplane : Enemy
     {
-        public Airplane(Form form) : base(GetAirplaneProperties())
+        public Airplane(Form form) : base(ConstructorProperties())
         {
             movementSpeed = 20;
             this.form = form;
@@ -21,8 +22,11 @@ namespace Kruspki1
         public override void Attack(object sender, EventArgs args)
         {
             Point startingPoint = new Point(Left, Top);
-            // form.Controls.Add( new Bomb(form,startingPoint) );
-            Form1.enemies.Add(new Bomb(form, startingPoint));
+
+            if (form.Controls.Contains(this))
+            {
+                Form1.characters.Add(new Bomb(form, startingPoint));
+            }
         }
 
         public override void Move(object sender, EventArgs args)
@@ -31,15 +35,14 @@ namespace Kruspki1
             Left -= movementSpeed;
         }
 
-        private static int[] GetAirplaneProperties()
+        private static int[] ConstructorProperties()
         {
             Random random = new Random();
             top = 10;
-            left = 800;
+            left = 1000;
             movementInterval = random.Next(90,110);
             attackInterval = random.Next(1100,1300);
-            int[] result = new int[] {top,left,movementInterval,attackInterval };
-            return result;
+            return new int[] {top,left,movementInterval,attackInterval };
         }
     }
 }

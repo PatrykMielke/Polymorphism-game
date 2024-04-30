@@ -10,6 +10,7 @@ using Timer = System.Windows.Forms.Timer;
 
 namespace Kruspki1
 {
+    [System.ComponentModel.DesignerCategory("Code")]
     internal abstract class Character : PictureBox
     {
         protected Form form;

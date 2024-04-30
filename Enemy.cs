@@ -9,7 +9,8 @@ using System.Windows.Forms.VisualStyles;
 
 namespace Kruspki1
 {
-    internal class Enemy : Character, IEnemyFunctions
+    [System.ComponentModel.DesignerCategory("Code")]
+    internal abstract class Enemy : Character, IEnemyFunctions
     {
         protected Timer attackFrequencyTimer = new Timer();
         protected Timer movementTimer = new Timer();
@@ -31,14 +32,8 @@ namespace Kruspki1
         }
 
 
-        public virtual void Attack(object sender, EventArgs args)
-        {
-            throw new NotImplementedException();
-        }
+        public abstract void Attack(object sender, EventArgs args);
 
-        public virtual void Move(object sender, EventArgs args)
-        {
-            throw new NotImplementedException();
-        }
+        public abstract new void Move(object sender, EventArgs args);
     }
 }

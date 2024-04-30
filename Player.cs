@@ -9,6 +9,7 @@ using System.Xml.Linq;
 
 namespace Kruspki1
 {
+    [System.ComponentModel.DesignerCategory("Code")]
     internal class Player : Character, IPlayerFunctions
     {
         Timer jumpTimer = new Timer();
@@ -25,8 +26,9 @@ namespace Kruspki1
 
             Top = defaultHeight;
             Left = 100;
-            BackColor = Color.Pink;
-            Size = new Size(60,60);
+            BackColor = Color.BlueViolet;
+            Size = new Size(40,60);
+            Tag = "Player";
 
             BringToFront();
 
@@ -35,7 +37,7 @@ namespace Kruspki1
             
         }
 
-        public void Move(object sender, KeyEventArgs args)
+        public new void Move(object sender, KeyEventArgs args)
         {
             if(args.KeyCode == Keys.Right)
             {
@@ -73,7 +75,6 @@ namespace Kruspki1
             {
                 jumpTimer.Tick -= JumpDown;
                 jumpTimer.Stop();
-                return;
             }
             else
             {

@@ -8,17 +8,19 @@ using System.Windows.Forms;
 
 namespace Kruspki1
 {
+    [System.ComponentModel.DesignerCategory("Code")]
     internal class Bomb : PictureBox
     {
         readonly Form form;
-        readonly Timer bombTimer = new Timer();
+        Timer bombTimer = new Timer();
         public Bomb(Form form, Point startingPoint)
         {
             this.form = form;
             Location = startingPoint;
             BackColor = Color.Red;
-            Size = new Size(48,48);
+            Size = new Size(40,40);
             Tag = "RIP";
+
             form.Controls.Add(this);
 
             bombTimer.Interval = 100;
