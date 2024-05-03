@@ -1,42 +1,40 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+using WinformGame;
 
 namespace Kruspki1
 {
     [System.ComponentModel.DesignerCategory("Code")]
-    internal class Bullet : PictureBox
+    internal class Bullet : Projectile
     {
         private Form form;
-        Timer bulletTimer = new Timer();
         private Point startingPoint;
         private bool isShootingDirectionLeft;
 
-        public Bullet(Form form, Point startingPoint, bool isDirectionLeft)
+        public Bullet(Form form, Point startingPoint, bool isDirectionLeft) : base()
         {
             this.form = form;
             this.startingPoint = startingPoint;
-            this.isShootingDirectionLeft = isDirectionLeft;
+            isShootingDirectionLeft = isDirectionLeft;
 
             Location = startingPoint;
             BackColor = Color.Red;
             Size = new Size(20,10);
-            Tag = "RIP";
 
             form.Controls.Add(this);
 
-            bulletTimer.Interval = 10;
-            bulletTimer.Tick += AttackMove;
-            bulletTimer.Start();
+            projectileTimer.Interval = 10;
+            projectileTimer.Start();
         }
-        private void AttackMove(object sender, EventArgs e)
+        protected override void AttackMove(object sender, EventArgs e)
         {
             if (isShootingDirectionLeft)
             {
                 if (Left <= 0)
                 {
                     form.Controls.Remove(this);
-                    bulletTimer.Dispose();
+                    projectileTimer.Dispose();
                 }
                 Left -= 10;
             }
@@ -45,7 +43,7 @@ namespace Kruspki1
                 if (Left >= 800)
                 {
                     form.Controls.Remove(this);
-                    bulletTimer.Dispose();
+                    projectileTimer.Dispose();
                 }
                 Left += 10;
             }

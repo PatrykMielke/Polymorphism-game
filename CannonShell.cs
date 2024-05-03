@@ -12,36 +12,34 @@ using System.Reflection.Emit;
 namespace WinformGame
 {
     [System.ComponentModel.DesignerCategory("Code")]
-    internal class CannonShell : PictureBox
+    internal class CannonShell : Projectile
     {
         private Form form;
-        Timer projectileTimer = new Timer();
         private Point startingPoint;
         private Point playerPos;
 
-        public CannonShell(Form form, Point startingPoint, Point playerPos)
+        int stepX;
+        int stepY;
+
+        public CannonShell(Form form, Point startingPoint, Point playerPos) : base()
         {
             this.form = form;
             this.startingPoint = startingPoint;
             this.playerPos = playerPos;
 
+            stepX = (playerPos.X - startingPoint.X) / 30;
+            stepY = (playerPos.Y - startingPoint.Y) / 30;
+
             Location = startingPoint;
             BackColor = Color.Red;
             Size = new Size(20, 20);
-            Tag = "RIP";
-
             form.Controls.Add(this);
 
             projectileTimer.Interval = 20;
-            projectileTimer.Tick += AttackMove;
             projectileTimer.Start();
         }
-        private void AttackMove(object sender, EventArgs e)
+        protected override void AttackMove(object sender, EventArgs e)
         {
-
-            int stepX = ( playerPos.X - startingPoint.X ) / 30;
-            int stepY = ( playerPos.Y - startingPoint.Y) / 30;
-
             Top += stepY;
             Left += stepX;
 

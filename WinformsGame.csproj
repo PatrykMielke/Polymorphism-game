@@ -79,6 +79,9 @@
     <Compile Include="IPlayerFunctions.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Program.cs" />
+    <Compile Include="Projectile.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Soldier.cs" />
     <EmbeddedResource Include="Form1.resx">
