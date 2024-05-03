@@ -13,15 +13,28 @@ namespace Kruspki1
     {
         private bool isShootingLeft;
         private bool moveForward;
-        public Soldier(Form form, bool isShootingLeft) : base(ConstructorProperties())
+        public Soldier(Form form, bool isShootingLeft) : base()
         {
-            movementSpeed = 15;
             this.form = form;
-            BackColor = Color.RosyBrown;
-            form.Controls.Add(this);
-            Size = new Size(40,60);
             this.isShootingLeft = isShootingLeft;
+            movementSpeed = 15;
+
+            Top = 420;
+            Left = 780;
+
+            BackColor = Color.RosyBrown;
+            Size = new Size(40,60);
+
+            form.Controls.Add(this);
             moveForward = true;
+
+
+            movementTimer.Interval = random.Next(90, 110);
+            attackFrequencyTimer.Interval = random.Next(2000, 2200);
+
+            movementTimer.Start();
+            attackFrequencyTimer.Start();
+
         }
 
         public override void Attack(object sender, EventArgs args)
@@ -46,16 +59,6 @@ namespace Kruspki1
                 if(Left >= 780) moveForward = true;
                 Left += movementSpeed;
             }
-        }
-        private static int[] ConstructorProperties()
-        {
-            Random random = new Random();
-            top = 420;
-            left = 780;
-            movementInterval = random.Next(90,110);
-            attackInterval = random.Next(2000, 2200);
-            int[] result = new int[] { top, left, movementInterval, attackInterval };
-            return result;
         }
     }
 }

@@ -11,12 +11,22 @@ namespace Kruspki1
     [System.ComponentModel.DesignerCategory("Code")]
     internal class Airplane : Enemy
     {
-        public Airplane(Form form) : base(ConstructorProperties())
+        public Airplane(Form form) : base()
         {
             movementSpeed = 20;
             this.form = form;
+
+            Top = 10;
+            Left = 1000;
+
             BackColor = Color.Gray;
             form.Controls.Add(this);
+
+            movementTimer.Interval = random.Next(90, 110);
+            attackFrequencyTimer.Interval = random.Next(1100, 1300);
+
+            movementTimer.Start();
+            attackFrequencyTimer.Start();
         }
 
         public override void Attack(object sender, EventArgs args)
@@ -33,16 +43,6 @@ namespace Kruspki1
         {
             if (Left < -40) form.Controls.Remove(this);
             Left -= movementSpeed;
-        }
-
-        private static int[] ConstructorProperties()
-        {
-            Random random = new Random();
-            top = 10;
-            left = 1000;
-            movementInterval = random.Next(90,110);
-            attackInterval = random.Next(1100,1300);
-            return new int[] {top,left,movementInterval,attackInterval };
         }
     }
 }

@@ -14,21 +14,14 @@ namespace Kruspki1
     {
         protected Timer attackFrequencyTimer = new Timer();
         protected Timer movementTimer = new Timer();
-        protected Random randomNumber = new Random();
+        protected Random random = new Random();
 
-        protected Enemy(int[] ints)
+        protected Enemy()
         {
-            Top = ints[0];
-            Left = ints[1];
             Tag = "RIP";
 
-            movementTimer.Interval = ints[2];
             movementTimer.Tick += Move;
-            movementTimer.Start();
-
-            attackFrequencyTimer.Interval = ints[3];
             attackFrequencyTimer.Tick += Attack;
-            attackFrequencyTimer.Start();
         }
 
 

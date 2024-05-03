@@ -13,23 +13,33 @@ namespace Kruspki1
     internal class Cannon : Enemy
     {
         private bool moveForward;
-        public Cannon(Form form) : base(ReturnInts())
+        public Cannon(Form form) : base()
         {
-            movementSpeed = 15;
+            
             this.form = form;
             moveForward = true;
+            movementSpeed = 5;
+
 
             BackColor = Color.Black;
             Size = new Size(90, 50);
 
+            Top = 430;
+            Left = 890;
+
             form.Controls.Add(this);
+
+            movementTimer.Interval = 200;
+            attackFrequencyTimer.Interval = random.Next(2900, 3000);
+
+            movementTimer.Start();
+            attackFrequencyTimer.Start();
         }
 
         public override void Attack(object sender, EventArgs args)
         {
             Point startingPoint = new Point(Left, Top);
             Point playerPos = TrackPlayersPosition();
-
 
             if (form.Controls.Contains(this))
             {
@@ -50,16 +60,16 @@ namespace Kruspki1
 
         public override void Move(object sender, EventArgs args)
         {
-            //throw new NotImplementedException();
-        }
-        private static int[] ReturnInts()
-        {
-            top = 430;
-            left = 890;
-            movementInterval = 100;
-            attackInterval = 3000;
-            int[] result = new int[] { top, left, movementInterval, attackInterval };
-            return result;
+            if (moveForward)
+            {
+                if (Left <= 880) moveForward = false;
+                Left -= movementSpeed;
+            }
+            else
+            {
+                if (Left >= 890) moveForward = true;
+                Left += movementSpeed;
+            }
         }
     }
 }
