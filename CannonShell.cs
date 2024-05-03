@@ -27,7 +27,6 @@ namespace WinformGame
             this.startingPoint = startingPoint;
             this.playerPos = playerPos;
 
-            stepX = (playerPos.X - startingPoint.X) / 30;
             stepY = (playerPos.Y - startingPoint.Y) / 30;
 
             Location = startingPoint;
@@ -41,7 +40,7 @@ namespace WinformGame
         protected override void AttackMove(object sender, EventArgs e)
         {
             Top += stepY;
-            Left += stepX;
+            Left -= 30;
 
             if (Left < 0 || Left > 1000 || Top > 600 || Top < 0)
             {
